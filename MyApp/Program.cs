@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PuppeteerSharp;
+using System;
 using System.Collections.Generic;
 using System.Media;
 using System.Threading.Tasks;
@@ -20,11 +21,23 @@ namespace MyApp
         static async Task Main(string[] args)
         {
 
+            // Download the Chromium revision if it does not already exist
+            await new BrowserFetcher().DownloadAsync(BrowserFetcher.DefaultRevision);
+
+            var browser = await Puppeteer.LaunchAsync(new LaunchOptions
+            {
+                Headless = false
+            });
+
             while (true)
             {
                 foreach (var crawler in dataCrawlers)
                 {
-                    var result = await crawler.FindAsync();
+                    if (browser.IsClosed)
+                    {
+
+                    }
+                    var result = await crawler.FindAsync(browser);
 
                     if (result.Found)
                     {
@@ -37,6 +50,15 @@ namespace MyApp
             }
 
             Console.ReadLine();
+        }
+
+        private async Task< Browser >CreateBrowser() {
+            var browser = await Puppeteer.LaunchAsync(new LaunchOptions
+            {
+                Headless = false
+            });
+
+            return browser;
         }
     }
 }

@@ -15,16 +15,8 @@ namespace MyApp
             "sofort ab Lager",
         };
 
-        public async Task<(bool, string)> FindAsync()
+        public async Task<(bool, string)> FindAsync(Browser browser)
         {
-                        // Download the Chromium revision if it does not already exist
-            await new BrowserFetcher().DownloadAsync(BrowserFetcher.DefaultRevision);
-
-            var browser = await Puppeteer.LaunchAsync(new LaunchOptions
-            {
-                Headless = false
-            });
-
             var page = await browser.NewPageAsync();
             await page.GoToAsync(nbbUrl);
 

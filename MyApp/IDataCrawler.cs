@@ -1,9 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using PuppeteerSharp;
+using System.Threading.Tasks;
 
 namespace MyApp
 {
     interface IDataCrawler
     {
-        Task<(bool Found, string Url)> FindAsync();
+        Task<(bool Found, string Url)> FindAsync(Browser browser);
     }
 }
