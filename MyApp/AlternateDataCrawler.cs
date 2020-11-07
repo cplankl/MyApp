@@ -16,7 +16,7 @@ namespace MyApp
             "Ware im Zulauf",
         };
 
-        public async Task<bool> FindAsync()
+        public async Task<(bool, string)> FindAsync()
         {
             // Download the Chromium revision if it does not already exist
             await new BrowserFetcher().DownloadAsync(BrowserFetcher.DefaultRevision);
@@ -31,19 +31,14 @@ namespace MyApp
 
             // Store the HTML of the current page
             string content = await page.GetContentAsync();
-            await browser.CloseAsync();
+            await page.CloseAsync();
 
             if (content.Length == 0)
             {
                 throw new DataCrawlerException(nameof(NbbDataCrawler) + "cannot access page");
             }
 
-            if (SuccessfulAvailabilities.Any(x => content.Contains(x, StringComparison.InvariantCultureIgnoreCase)))
-            {
-                return true;
-            }
-
-            return false;
+            return (SuccessfulAvailabilities.Any(x => content.Contains(x, StringComparison.InvariantCultureIgnoreCase)), alternateUrl);
         }
     }
 }

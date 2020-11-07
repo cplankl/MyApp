@@ -4,6 +4,6 @@ namespace MyApp
 {
     interface IDataCrawler
     {
-        Task<bool> FindAsync();
+        Task<(bool Found, string Url)> FindAsync();
     }
 }

@@ -11,7 +11,7 @@ namespace MyApp
 
         const string missingPage = "<title>404 - Die Seite konnte nicht gefunden werden | Mindfactory.de</title>";
 
-        public async Task<bool> FindAsync()
+        public async Task<(bool, string)> FindAsync()
         {
             // Download the Chromium revision if it does not already exist
             await new BrowserFetcher().DownloadAsync(BrowserFetcher.DefaultRevision);
@@ -26,8 +26,9 @@ namespace MyApp
             
             // Store the HTML of the current page
             string content = await page.GetContentAsync();
+            await page.CloseAsync();
 
-            return !content.Contains(missingPage);
+            return (!content.Contains(missingPage), mindfactoryUrl);
         }
     }
 }
