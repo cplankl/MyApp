@@ -20,39 +20,41 @@ namespace MyApp
 
         static async Task Main(string[] args)
         {
+            Console.WriteLine("Starte Suchvorgang...");
 
-            // Download the Chromium revision if it does not already exist
             await new BrowserFetcher().DownloadAsync(BrowserFetcher.DefaultRevision);
-
-            var browser = await Puppeteer.LaunchAsync(new LaunchOptions
-            {
-                Headless = false
-            });
+            var browser = await CreateBrowser();
 
             while (true)
             {
+
+                Console.WriteLine("Starte Suchlauf...");
                 foreach (var crawler in dataCrawlers)
                 {
                     if (browser.IsClosed)
                     {
-
+                        browser = await CreateBrowser();
                     }
-                    var result = await crawler.FindAsync(browser);
 
-                    if (result.Found)
+                    var (Found, Url) = await crawler.FindAsync(browser);
+
+                    if (Found)
                     {
-                        Console.WriteLine($"CPU gefunden bei {result.Url}");
+                        Console.BackgroundColor = ConsoleColor.Green;
+                        Console.WriteLine($"CPU gefunden bei {Url}");
                         SystemSounds.Beep.Play();
+                        Console.ResetColor();
                     }
                 }
 
+                await browser.CloseAsync();
+
                 System.Threading.Thread.Sleep(TimeSpan.FromSeconds(30));
             }
-
-            Console.ReadLine();
         }
 
-        private async Task< Browser >CreateBrowser() {
+        private static async Task<Browser> CreateBrowser()
+        {
             var browser = await Puppeteer.LaunchAsync(new LaunchOptions
             {
                 Headless = false
