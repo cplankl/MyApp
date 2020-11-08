@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Media;
 using System.Threading.Tasks;
+using MyApp.DataCrawlers;
+using MyApp.Interfaces;
 
 namespace MyApp
 {
@@ -33,14 +35,21 @@ namespace MyApp
                         browser = await CreateBrowser();
                     }
 
-                    var (found, url) = await crawler.FindAsync(browser);
-
-                    if (found)
+                    try
                     {
-                        Console.BackgroundColor = ConsoleColor.Green;
-                        Console.WriteLine($"CPU gefunden bei {url}");
-                        SystemSounds.Beep.Play();
-                        Console.ResetColor();
+                        var (found, url) = await crawler.FindAsync(browser);
+
+                        if (found)
+                        {
+                            Console.BackgroundColor = ConsoleColor.Green;
+                            Console.WriteLine($"CPU gefunden bei {url}");
+                            SystemSounds.Beep.Play();
+                            Console.ResetColor();
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
                     }
                 }
 
