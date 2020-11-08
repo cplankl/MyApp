@@ -16,7 +16,8 @@ namespace MyApp
             //new AlternateDataCrawler(),
             //new NbbDataCrawler(),
             //new MindfactoryDataCrawler()
-            new MediaMarktDataCrawler()
+            new MediaMarktDataCrawler(),
+            new SaturnDataCrawler()
         };
 
         private static async Task Main()
