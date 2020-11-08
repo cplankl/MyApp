@@ -12,10 +12,11 @@ namespace MyApp
     {
         private static readonly List<IDataCrawler> DataCrawlers = new List<IDataCrawler>()
         {
-            new ProShopDataCrawler(),
-            new AlternateDataCrawler(),
-            new NbbDataCrawler(),
-            new MindfactoryDataCrawler()
+            //new ProShopDataCrawler(),
+            //new AlternateDataCrawler(),
+            //new NbbDataCrawler(),
+            //new MindfactoryDataCrawler()
+            new MediaMarktDataCrawler()
         };
 
         private static async Task Main()
