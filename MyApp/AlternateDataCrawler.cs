@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace MyApp
 {
-    class AlternateDataCrawler : IDataCrawler
+    internal class AlternateDataCrawler : IDataCrawler
     {
-        const string alternateUrl = "https://www.alternate.de/html/product/1685590";
+        private const string AlternateUrl = "https://www.alternate.de/html/product/1685590";
 
         private static readonly List<string> SuccessfulAvailabilities = new List<string>
         {
@@ -19,7 +19,7 @@ namespace MyApp
         public async Task<(bool, string)> FindAsync(Browser browser)
         {
             var page = await browser.NewPageAsync();
-            await page.GoToAsync(alternateUrl);
+            await page.GoToAsync(AlternateUrl);
 
             // Store the HTML of the current page
             string content = await page.GetContentAsync();
@@ -30,7 +30,8 @@ namespace MyApp
                 throw new DataCrawlerException(nameof(NbbDataCrawler) + "cannot access page");
             }
 
-            return (SuccessfulAvailabilities.Any(x => content.Contains(x, StringComparison.InvariantCultureIgnoreCase)), alternateUrl);
+            return (SuccessfulAvailabilities.Any(x => content.Contains(x, StringComparison.InvariantCultureIgnoreCase)),
+                AlternateUrl);
         }
     }
 }

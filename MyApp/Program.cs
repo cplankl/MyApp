@@ -6,19 +6,17 @@ using System.Threading.Tasks;
 
 namespace MyApp
 {
-    partial class Program
+    internal class Program
     {
-
-        static List<IDataCrawler> dataCrawlers = new List<IDataCrawler>()
+        private static readonly List<IDataCrawler> DataCrawlers = new List<IDataCrawler>()
         {
             new ProShopDataCrawler(),
             new AlternateDataCrawler(),
             new NbbDataCrawler(),
             new MindfactoryDataCrawler()
-
         };
 
-        static async Task Main(string[] args)
+        private static async Task Main()
         {
             Console.WriteLine("Starte Suchvorgang...");
 
@@ -27,21 +25,20 @@ namespace MyApp
 
             while (true)
             {
-
                 Console.WriteLine("Starte Suchlauf...");
-                foreach (var crawler in dataCrawlers)
+                foreach (var crawler in DataCrawlers)
                 {
                     if (browser.IsClosed)
                     {
                         browser = await CreateBrowser();
                     }
 
-                    var (Found, Url) = await crawler.FindAsync(browser);
+                    var (found, url) = await crawler.FindAsync(browser);
 
-                    if (Found)
+                    if (found)
                     {
                         Console.BackgroundColor = ConsoleColor.Green;
-                        Console.WriteLine($"CPU gefunden bei {Url}");
+                        Console.WriteLine($"CPU gefunden bei {url}");
                         SystemSounds.Beep.Play();
                         Console.ResetColor();
                     }
@@ -51,6 +48,8 @@ namespace MyApp
 
                 System.Threading.Thread.Sleep(TimeSpan.FromSeconds(30));
             }
+
+            // ReSharper disable once FunctionNeverReturns
         }
 
         private static async Task<Browser> CreateBrowser()

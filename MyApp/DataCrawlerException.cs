@@ -6,7 +6,6 @@ namespace MyApp
     {
         public DataCrawlerException(string exceptionMessage) : base(exceptionMessage)
         {
-
         }
     }
 }
