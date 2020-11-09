@@ -1,4 +1,5 @@
-﻿using MyApp.DataCrawlers.Base;
+﻿using System;
+using MyApp.DataCrawlers.Base;
 
 namespace MyApp.DataCrawlers.Gpu
 {
@@ -7,9 +8,9 @@ namespace MyApp.DataCrawlers.Gpu
         public override string CrawlerName { get; } = "Csv";
         protected override bool FoundContent(string content)
         {
-            throw new System.NotImplementedException();
+            return !content.Contains("Ihre Suche ergab keine Treffer", StringComparison.CurrentCultureIgnoreCase);
         }
 
-        protected override string Url { get; }
+        protected override string Url { get; } = "https://www.csv.de/artsearchresult.php?STICHWORT=rx+6800";
     }
 }

@@ -13,14 +13,14 @@ namespace MyApp
     {
         private static readonly List<IDataCrawler> DataCrawlers = new List<IDataCrawler>()
         {
-            new ProShopDataCrawler(),
-            new AlternateDataCrawler(),
-            new NbbDataCrawler(),
-            new MindfactoryDataCrawler(),
-            new MediaMarktDataCrawler(),
-            new SaturnDataCrawler(),
-            new AlzaDataCrawler(),
-            new CsvDataCrawler()
+            new DataCrawlers.Gpu.ProShopDataCrawler(),
+            new DataCrawlers.Gpu.AlternateDataCrawler(),
+            new DataCrawlers.Gpu.NbbDataCrawler(),
+            new DataCrawlers.Gpu.MindfactoryDataCrawler(),
+            new DataCrawlers.Gpu.MediaMarktDataCrawler(),
+            new DataCrawlers.Gpu.SaturnDataCrawler(),
+            new DataCrawlers.Gpu.AlzaDataCrawler(),
+            new DataCrawlers.Gpu.CsvDataCrawler()
         };
 
         private static async Task Main()
@@ -48,7 +48,7 @@ namespace MyApp
                         if (found)
                         {
                             Console.BackgroundColor = ConsoleColor.Green;
-                            Console.WriteLine($"CPU gefunden bei {url}");
+                            Console.WriteLine($"Gpu gefunden bei {url}");
                             SystemSounds.Beep.Play();
                             Console.ResetColor();
                         }

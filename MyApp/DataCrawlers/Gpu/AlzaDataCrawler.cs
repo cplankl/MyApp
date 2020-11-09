@@ -8,9 +8,9 @@ namespace MyApp.DataCrawlers.Gpu
         public override string CrawlerName { get; } = "Alza";
         protected override bool FoundContent(string content)
         {
-            throw new NotImplementedException();
+            return !content.Contains("keine genaue Ergebnis wurde gefunden.", StringComparison.CurrentCultureIgnoreCase);
         }
 
-        protected override string Url { get; }
+        protected override string Url { get; } = "https://www.alza.de/search.htm?exps=rx%206800";
     }
 }
