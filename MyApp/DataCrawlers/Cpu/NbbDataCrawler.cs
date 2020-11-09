@@ -2,7 +2,7 @@
 using System.Linq;
 using MyApp.DataCrawlers.Base;
 
-namespace MyApp.DataCrawlers
+namespace MyApp.DataCrawlers.Cpu
 {
     internal class NbbDataCrawler : DataCrawlerBase
     {
@@ -18,7 +18,7 @@ namespace MyApp.DataCrawlers
 
         protected override bool FoundContent(string content)
         {
-            return SuccessfulAvailabilities.Any(x => content.Contains(x));
+            return SuccessfulAvailabilities.Any(x => content.Contains((string) x));
         }
     }
 }

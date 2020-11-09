@@ -1,6 +1,6 @@
 ﻿using MyApp.DataCrawlers.Base;
 
-namespace MyApp.DataCrawlers
+namespace MyApp.DataCrawlers.Cpu
 {
     internal class ProShopDataCrawler : DataCrawlerBase
     {

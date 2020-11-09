@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MyApp.DataCrawlers.Base;
 
-namespace MyApp.DataCrawlers
+namespace MyApp.DataCrawlers.Cpu
 {
     internal class AlternateDataCrawler : DataCrawlerBase
     {
@@ -19,7 +19,7 @@ namespace MyApp.DataCrawlers
 
         protected override bool FoundContent(string content)
         {
-            return SuccessfulAvailabilities.Any(x => content.Contains(x, StringComparison.InvariantCultureIgnoreCase));
+            return SuccessfulAvailabilities.Any(x => content.Contains((string) x, StringComparison.InvariantCultureIgnoreCase));
         }
     }
 }

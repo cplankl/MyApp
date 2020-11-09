@@ -4,7 +4,7 @@ using PuppeteerSharp;
 
 namespace MyApp.DataCrawlers.Base
 {
-    internal abstract class DataCrawlerBase: IDataCrawler
+    public abstract class DataCrawlerBase: IDataCrawler
     {
         public abstract string CrawlerName { get; }
 

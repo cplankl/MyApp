@@ -1,11 +1,11 @@
 ﻿using System;
 using MyApp.DataCrawlers.Base;
 
-namespace MyApp.DataCrawlers
+namespace MyApp.DataCrawlers.Cpu
 {
-    internal class SaturnDataCrawler : DataCrawlerBase
+    internal class MediaMarktDataCrawler : DataCrawlerBase
     {
-        public override string CrawlerName { get; } = "Saturn";
+        public override string CrawlerName { get; } = "MediaMarkt";
 
         protected override bool FoundContent(string content)
         {
@@ -15,6 +15,6 @@ namespace MyApp.DataCrawlers
         }
 
         protected override string Url { get; } =
-            "https://www.saturn.de/de/category/_amd-am4-cpu-693066.html?sort=initialimportdate%2Bdesc&id=693066";
+            "https://www.mediamarkt.de/de/category/_amd-am4-cpu-692540.html?sort=initialimportdate%2Bdesc&id=692540";
     }
 }

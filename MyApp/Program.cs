@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Media;
 using System.Threading.Tasks;
 using MyApp.DataCrawlers;
+using MyApp.DataCrawlers.Cpu;
 using MyApp.Interfaces;
 
 namespace MyApp
