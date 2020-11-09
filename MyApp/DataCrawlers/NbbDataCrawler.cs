@@ -14,6 +14,8 @@ namespace MyApp.DataCrawlers
             "sofort ab Lager",
         };
 
+        public override string CrawlerName { get; } = "Notebooksbilliger";
+
         protected override bool FoundContent(string content)
         {
             return SuccessfulAvailabilities.Any(x => content.Contains(x));

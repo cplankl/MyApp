@@ -5,6 +5,8 @@ namespace MyApp.DataCrawlers
 {
     internal class SaturnDataCrawler : DataCrawlerBase
     {
+        public override string CrawlerName { get; } = "Saturn";
+
         protected override bool FoundContent(string content)
         {
             var result = content.Contains("5900x", StringComparison.CurrentCultureIgnoreCase);

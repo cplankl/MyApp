@@ -6,6 +6,8 @@ namespace MyApp.DataCrawlers.Base
 {
     internal abstract class DataCrawlerBase: IDataCrawler
     {
+        public abstract string CrawlerName { get; }
+
         public virtual async Task<(bool Found, string Url)> FindAsync(Browser browser)
         {
             var page = await browser.NewPageAsync();

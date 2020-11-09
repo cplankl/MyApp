@@ -5,6 +5,8 @@ namespace MyApp.DataCrawlers
 {
     internal class MediaMarktDataCrawler : DataCrawlerBase
     {
+        public override string CrawlerName { get; } = "MediaMarkt";
+
         protected override bool FoundContent(string content)
         {
             var result = content.Contains("5900x", StringComparison.CurrentCultureIgnoreCase);

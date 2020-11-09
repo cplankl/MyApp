@@ -15,6 +15,8 @@ namespace MyApp.DataCrawlers
             "Ware im Zulauf",
         };
 
+        public override string CrawlerName { get; } = "Alternate";
+
         protected override bool FoundContent(string content)
         {
             return SuccessfulAvailabilities.Any(x => content.Contains(x, StringComparison.InvariantCultureIgnoreCase));

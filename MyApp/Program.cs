@@ -52,7 +52,7 @@ namespace MyApp
                     }
                     catch (Exception e)
                     {
-                        Console.WriteLine(e);
+                        Console.WriteLine($"Fehler beim Pruefen von {crawler.CrawlerName}: {e.Message}");
                     }
                 }
 
