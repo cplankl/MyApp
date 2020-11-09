@@ -12,10 +12,10 @@ namespace MyApp
     {
         private static readonly List<IDataCrawler> DataCrawlers = new List<IDataCrawler>()
         {
-            //new ProShopDataCrawler(),
-            //new AlternateDataCrawler(),
-            //new NbbDataCrawler(),
-            //new MindfactoryDataCrawler()
+            new ProShopDataCrawler(),
+            new AlternateDataCrawler(),
+            new NbbDataCrawler(),
+            new MindfactoryDataCrawler(),
             new MediaMarktDataCrawler(),
             new SaturnDataCrawler()
         };
@@ -26,10 +26,11 @@ namespace MyApp
 
             await new BrowserFetcher().DownloadAsync(BrowserFetcher.DefaultRevision);
             var browser = await CreateBrowser();
+            var counter = 1;
 
             while (true)
             {
-                Console.WriteLine("Starte Suchlauf...");
+                Console.WriteLine($"Starte Suchlauf {counter++}...");
                 foreach (var crawler in DataCrawlers)
                 {
                     if (browser.IsClosed)
