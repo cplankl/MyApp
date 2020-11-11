@@ -6,9 +6,11 @@ namespace MyApp.DataCrawlers
     internal class CsvDataCrawler : DataCrawlerBase
     {
         public override string CrawlerName { get; } = "Csv";
+
         protected override bool FoundContent(string content)
         {
-            return !content.Contains("Ware nicht lagernd", StringComparison.CurrentCultureIgnoreCase);
+            return !content.Contains("Ware nicht lagernd", StringComparison.CurrentCultureIgnoreCase)
+                   && !content.Contains("Ware ist bestellt", StringComparison.CurrentCultureIgnoreCase);
         }
 
         protected override string Url { get; } = "https://www.csv.de/artinfo.php?artnr=A0138073&KATEGORIE=0138";
