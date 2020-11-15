@@ -13,6 +13,6 @@ namespace MyApp.DataCrawlers.Gpu
         }
 
         protected override string Url { get; } =
-            "https://www.notebooksbilliger.de/produkte/Rx+6800+Xt#!/q/Rx%206800%20Xt/limit/50";
+            "https://www.notebooksbilliger.de/produkte/Rx+6800#!/q/Rx%206800/limit/50";
     }
 }

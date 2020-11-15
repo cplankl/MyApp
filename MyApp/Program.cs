@@ -59,6 +59,8 @@ namespace MyApp
 
                 await browser.CloseAsync();
             }
+
+            // ReSharper disable once FunctionNeverReturns
         }
 
         private static async Task<Browser> CreateBrowser()

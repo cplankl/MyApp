@@ -15,7 +15,8 @@ namespace MyApp.DataCrawlers.Gpu
 
         protected override bool CheckForBotDetection(string content)
         {
-            return content.Contains("Please verify yourself", StringComparison.CurrentCultureIgnoreCase);
+            return content.Contains("Please verify yourself", StringComparison.CurrentCultureIgnoreCase)
+                   || content.Contains("Something went wrong", StringComparison.CurrentCultureIgnoreCase);
         }
 
         protected override string Url { get; } = "https://www.alza.de/search.htm?exps=rx%206800";
