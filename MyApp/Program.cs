@@ -3,8 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Media;
 using System.Threading.Tasks;
-using MyApp.DataCrawlers;
-using MyApp.DataCrawlers.Cpu;
 using MyApp.Interfaces;
 
 namespace MyApp
@@ -60,11 +58,7 @@ namespace MyApp
                 }
 
                 await browser.CloseAsync();
-
-                System.Threading.Thread.Sleep(TimeSpan.FromSeconds(30));
             }
-
-            // ReSharper disable once FunctionNeverReturns
         }
 
         private static async Task<Browser> CreateBrowser()
