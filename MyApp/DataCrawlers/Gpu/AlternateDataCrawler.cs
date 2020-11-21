@@ -8,9 +8,9 @@ namespace MyApp.DataCrawlers.Gpu
         public override string CrawlerName { get; } = "Alternate";
         protected override bool FoundContent(string content)
         {
-            return content.Contains("rx 6800 xt", StringComparison.CurrentCultureIgnoreCase);
+            return !content.Contains("Aktualisierungsphase", StringComparison.CurrentCultureIgnoreCase);
         }
 
-        protected override string Url { get; } = "https://www.alternate.de/html/search.html?size=500&query=rx+6800";
+        protected override string Url { get; } = "https://m.alternate.de/listing.xhtml?articleId=1693000,1693003,1693517,1693527,1693351,1693352,1694279,1694280,1694766,1694767&showTree=8393";
     }
 }

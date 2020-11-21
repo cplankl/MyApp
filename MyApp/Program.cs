@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Media;
 using System.Threading.Tasks;
+using MyApp.DataCrawlers.Gpu;
 using MyApp.Interfaces;
 
 namespace MyApp
@@ -11,14 +12,17 @@ namespace MyApp
     {
         private static readonly List<IDataCrawler> DataCrawlers = new List<IDataCrawler>()
         {
-            new DataCrawlers.Gpu.ProShopDataCrawler(),
-            new DataCrawlers.Gpu.AlternateDataCrawler(),
-            new DataCrawlers.Gpu.NbbDataCrawler(),
-            new DataCrawlers.Gpu.MindfactoryDataCrawler(),
-            new DataCrawlers.Gpu.MediaMarktDataCrawler(),
-            new DataCrawlers.Gpu.SaturnDataCrawler(),
-            new DataCrawlers.Gpu.AlzaDataCrawler(),
-            new DataCrawlers.Gpu.CsvDataCrawler()
+            //new DataCrawlers.Gpu.ProShopDataCrawler(),
+            new AlternateDataCrawler(),
+            //new DataCrawlers.Gpu.NbbDataCrawler(),
+            new MindfactoryDataCrawler(),
+            new MfPowerColorDataCrawler(),
+            new MfSapphireDataCrawler(),
+            //new DataCrawlers.Gpu.MediaMarktDataCrawler(),
+            //new DataCrawlers.Gpu.SaturnDataCrawler(),
+            //new DataCrawlers.Gpu.AlzaDataCrawler(),
+            //new DataCrawlers.Gpu.CsvDataCrawler()
+            new AmdDataCrawler()
         };
 
         private static async Task Main()
@@ -57,7 +61,9 @@ namespace MyApp
                     }
                 }
 
-                await browser.CloseAsync();
+                //await browser.CloseAsync();
+
+                System.Threading.Thread.Sleep(TimeSpan.FromSeconds(30));
             }
 
             // ReSharper disable once FunctionNeverReturns
@@ -67,7 +73,7 @@ namespace MyApp
         {
             var browser = await Puppeteer.LaunchAsync(new LaunchOptions
             {
-                Headless = false
+                Headless = false,
             });
 
             return browser;

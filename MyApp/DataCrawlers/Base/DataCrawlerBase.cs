@@ -12,23 +12,31 @@ namespace MyApp.DataCrawlers.Base
         public virtual async Task<(bool Found, string Url)> FindAsync(Browser browser)
         {
             var page = await browser.NewPageAsync();
+            await page.SetCacheEnabledAsync(false);
             await page.GoToAsync(Url);
 
             // Store the HTML of the current page
             var content = await page.GetContentAsync();
-
-            await page.CloseAsync();
-
+            
             if (CheckForBotDetection(content))
             {
                 Console.BackgroundColor = ConsoleColor.Red;
                 Console.WriteLine($"Bot Detection gefunden bei {Url}");
                 Console.ResetColor();
 
+                await page.CloseAsync();
+
                 return (false, string.Empty);
             }
 
-            return (FoundContent(content), Url);
+            var result = (FoundContent(content), Url);
+
+            if (!result.Item1)
+            {
+                await page.CloseAsync();
+            }
+
+            return result;
         }
 
         protected abstract bool FoundContent(string content);
