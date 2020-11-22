@@ -12,8 +12,10 @@ namespace MyApp
     {
         private static readonly List<IDataCrawler> DataCrawlers = new List<IDataCrawler>()
         {
+            //new NvidiaDataCrawler(),
             //new DataCrawlers.Gpu.ProShopDataCrawler(),
-            new AlternateDataCrawler(),
+            new AmdExtendedDataCrawler(),
+            //new AlternateDataCrawler(),
             //new DataCrawlers.Gpu.NbbDataCrawler(),
             new MindfactoryDataCrawler(),
             new MfPowerColorDataCrawler(),
