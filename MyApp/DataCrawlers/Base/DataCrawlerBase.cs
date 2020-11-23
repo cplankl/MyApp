@@ -9,7 +9,7 @@ namespace MyApp.DataCrawlers.Base
     {
         public abstract string CrawlerName { get; }
 
-        public virtual async Task<(bool Found, string Url)> FindAsync(Browser browser)
+        public virtual async Task<(bool Found, string Url, string Message)> FindAsync(Browser browser)
         {
             var page = await browser.NewPageAsync();
             await page.SetCacheEnabledAsync(false);
@@ -17,7 +17,7 @@ namespace MyApp.DataCrawlers.Base
 
             // Store the HTML of the current page
             var content = await page.GetContentAsync();
-            
+
             if (CheckForBotDetection(content))
             {
                 Console.BackgroundColor = ConsoleColor.Red;
@@ -26,10 +26,12 @@ namespace MyApp.DataCrawlers.Base
 
                 await page.CloseAsync();
 
-                return (false, string.Empty);
+                return (false, string.Empty, null);
             }
 
-            var result = (FoundContent(content), Url);
+
+            var extendedContent = FoundExtendedContent(content);
+            var result = (extendedContent.Item1, Url, extendedContent.Item2);
 
             if (!result.Item1)
             {
@@ -39,7 +41,9 @@ namespace MyApp.DataCrawlers.Base
             return result;
         }
 
-        protected abstract bool FoundContent(string content);
+        protected virtual (bool, string) FoundExtendedContent(string content) => (FoundContent(content), null);
+
+        protected virtual bool FoundContent(string content) => false;
 
         protected virtual bool CheckForBotDetection(string content) => false;
 

@@ -12,6 +12,7 @@ namespace MyApp
     {
         private static readonly List<IDataCrawler> DataCrawlers = new List<IDataCrawler>()
         {
+            new HwLuxxDataCrawler(),
             //new NvidiaDataCrawler(),
             //new DataCrawlers.Gpu.ProShopDataCrawler(),
             new AmdExtendedDataCrawler(),
@@ -47,12 +48,12 @@ namespace MyApp
 
                     try
                     {
-                        var (found, url) = await crawler.FindAsync(browser);
+                        var (found, url, message) = await crawler.FindAsync(browser);
 
                         if (found)
                         {
                             Console.BackgroundColor = ConsoleColor.Green;
-                            Console.WriteLine($"Gpu gefunden bei {url}");
+                            Console.WriteLine(message ?? $"Gpu gefunden bei {url}");
                             SystemSounds.Beep.Play();
                             Console.ResetColor();
                         }
@@ -62,13 +63,8 @@ namespace MyApp
                         Console.WriteLine($"Fehler beim Pruefen von {crawler.CrawlerName}: {e.Message}");
                     }
                 }
-
-                //await browser.CloseAsync();
-
                 System.Threading.Thread.Sleep(TimeSpan.FromSeconds(30));
             }
-
-            // ReSharper disable once FunctionNeverReturns
         }
 
         private static async Task<Browser> CreateBrowser()
