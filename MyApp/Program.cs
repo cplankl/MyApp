@@ -10,22 +10,18 @@ namespace MyApp
 {
     internal class Program
     {
+        private static readonly Random Random = new Random();
+
         private static readonly List<IDataCrawler> DataCrawlers = new List<IDataCrawler>()
         {
-            new HwLuxxDataCrawler(),
-            //new NvidiaDataCrawler(),
-            //new DataCrawlers.Gpu.ProShopDataCrawler(),
+            new AmdDataCrawler(),
             new AmdExtendedDataCrawler(),
-            //new AlternateDataCrawler(),
-            //new DataCrawlers.Gpu.NbbDataCrawler(),
-            new MindfactoryDataCrawler(),
-            new MfPowerColorDataCrawler(),
-            new MfSapphireDataCrawler(),
-            //new DataCrawlers.Gpu.MediaMarktDataCrawler(),
-            //new DataCrawlers.Gpu.SaturnDataCrawler(),
-            //new DataCrawlers.Gpu.AlzaDataCrawler(),
-            //new DataCrawlers.Gpu.CsvDataCrawler()
-            new AmdDataCrawler()
+            new AmdExtendedTwoDataCrawler(),
+            new AmdSecondGeneralDataCrawler(),
+            //new AlternateDataCrawler()
+            //new NbbDataCrawler()
+            //new HwLuxxAmdDataCrawler(),
+            //new HwLuxxNvidiaDataCrawler()
         };
 
         private static async Task Main()
@@ -38,7 +34,7 @@ namespace MyApp
 
             while (true)
             {
-                Console.WriteLine($"Starte Suchlauf {counter++}...");
+                Console.WriteLine($"Starte Suchlauf {counter++} um {DateTime.Now.ToShortTimeString()}...");
                 foreach (var crawler in DataCrawlers)
                 {
                     if (browser.IsClosed)
@@ -53,6 +49,7 @@ namespace MyApp
                         if (found)
                         {
                             Console.BackgroundColor = ConsoleColor.Green;
+                            Console.ForegroundColor = ConsoleColor.Black;
                             Console.WriteLine(message ?? $"Gpu gefunden bei {url}");
                             SystemSounds.Beep.Play();
                             Console.ResetColor();
@@ -63,7 +60,7 @@ namespace MyApp
                         Console.WriteLine($"Fehler beim Pruefen von {crawler.CrawlerName}: {e.Message}");
                     }
                 }
-                System.Threading.Thread.Sleep(TimeSpan.FromSeconds(30));
+                System.Threading.Thread.Sleep(TimeSpan.FromSeconds(Random.Next(8,15)));
             }
         }
 
