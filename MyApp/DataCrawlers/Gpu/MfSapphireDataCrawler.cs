@@ -9,7 +9,7 @@ namespace MyApp.DataCrawlers.Gpu
 
         protected override bool FoundContent(string content)
         {
-            return !content.Contains("Nicht mehr lieferbar.", StringComparison.CurrentCultureIgnoreCase);
+            return !content.Contains("Die angeforderte URL existiert nicht", StringComparison.CurrentCultureIgnoreCase);
         }
 
         protected override string Url { get; } =
